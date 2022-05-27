@@ -65,9 +65,12 @@ Simplify API development for users, teams, and enterprises with the Swagger open
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DATABASE_URL`
+`DATABASE_URL`=postgresql://admin:12345@127.0.0.1:5455/{table_name}
+
 `FILE_XLS`
+
 `SHEET_NAME`
+
 `TABLE_NAME`
 
 
