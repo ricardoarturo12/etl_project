@@ -3,9 +3,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
+from dotenv import dotenv_values
+
+
+config = dotenv_values(".env")
+DATABASE = config["DATABASE_URL"]
+
 # crear database consolidado
 
-SQLALCHEMY_DATABASE_URL = "postgresql://admin:12345@127.0.0.1:5455/consolidado?sslmode=prefer"
+SQLALCHEMY_DATABASE_URL = f'{DATABASE}?sslmode=prefer'
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
 )

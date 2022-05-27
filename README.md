@@ -1,8 +1,6 @@
 
 # ETL - Project
 
-A brief description of what this project does and who it's for
-
 
 ## API Reference
 
@@ -68,6 +66,10 @@ Simplify API development for users, teams, and enterprises with the Swagger open
 To run this project, you will need to add the following environment variables to your .env file
 
 `DATABASE_URL`
+`FILE_XLS`
+`SHEET_NAME`
+`TABLE_NAME`
+
 
 
 ## Deployment

@@ -3,8 +3,17 @@ import pandas as pd
 from pip import main
 import sqlalchemy
 
-FILE_XLS = "consolidado.xlsx"
-FILE_PATH = "data/data1.sqlite3"
+
+from dotenv import dotenv_values
+
+
+config = dotenv_values(".env")
+DATABASE = config["DATABASE_URL"]
+FILE_XLS = config["FILE_XLS"]
+SHEET_NAME = config["SHEET_NAME"]
+TABLE_NAME = config["TABLE_NAME"]
+
+
 
 def format_data(df, columns_name):
     """Strip and capitalize columns data
@@ -20,8 +29,8 @@ def format_data(df, columns_name):
 
 def extract():
     # engine = sqlalchemy.create_engine(f'sqlite:///{FILE_PATH}')
-    engine = sqlalchemy.create_engine("postgresql://admin:12345@127.0.0.1:5455/consolidado?sslmode=prefer")
-    df = pd.read_excel(io=FILE_XLS, sheet_name="Consolidado")
+    engine = sqlalchemy.create_engine(f'{DATABASE}?sslmode=prefer')
+    df = pd.read_excel(io=FILE_XLS, sheet_name=SHEET_NAME)
     return engine, df
 
 
@@ -41,7 +50,7 @@ def transform(df):
 def load(df, engine):
     with engine.connect() as connection:
         df.to_sql(
-            name="consolidado",
+            name=TABLE_NAME,
             con=connection,
             if_exists="replace",
         )
